@@ -30,5 +30,17 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/pr-gta2:latest  
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/pr-gta2:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/pr-gta2:buildcache,mode=max
+
+      - name: Deploy in EC2
+        env: 
+          PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }} 
+          HOSTNAME: ${ { secrets.HOSTNAME }} 
+          USER_NAME: ${ { secrets.USERNAME }} 
+        run: sudo docker pull pchendla/:${{secrets.REPO_TASK}}:latest
+
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
+          
