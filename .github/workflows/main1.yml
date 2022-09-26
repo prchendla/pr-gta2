@@ -32,8 +32,9 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/pr-gta2:latest  
 
       - name: Deploy in EC2
-        env:
-          PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
-          HOSTNAME: ${ { secrets.HOSTNAME }}
-          USER_NAME: ${ { secrets.USERNAME }}
+        env: 
+          PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }} 
+          HOSTNAME: ${ { secrets.HOSTNAME }} 
+          USER_NAME: ${ { secrets.USERNAME }} 
+        run: sudo docker pull pchendla/:${{secrets.REPO_TASK}}
           
