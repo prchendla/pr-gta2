@@ -32,4 +32,3 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/pr-gta2:latest  
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/pr-gta2:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/pr-gta2:buildcache,mode=max
-          
