@@ -31,11 +31,9 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/pr-gta2:latest  
 
-      - name: Deploy to Server 1
-        uses: easingthemes/ssh-deploy@main
+      - name: Deploy in EC2
         env:
-          SSH_PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${ { secrets.HOST_DNS }}
-          REMOTE_USER: ${ { secrets.USERNAME }}
-          TARGET: ${ { secrets.TARGET_DIR }}
+          PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }}
+          HOSTNAME: ${ { secrets.HOSTNAME }}
+          USER_NAME: ${ { secrets.USERNAME }}
           
