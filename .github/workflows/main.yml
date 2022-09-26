@@ -29,14 +29,14 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{secrets.REPO_TASK}}:${{GITHUB_SHA}}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{secrets.REPO_TASK}}:${{github_sha}}
 
       - name: Deploy in EC2
         env: 
           PRIVATE_KEY: ${ { secrets.EC2_SSH_KEY }} 
           HOSTNAME: ${ { secrets.HOSTNAME }} 
           USER_NAME: ${ { secrets.USERNAME }} 
-        run: sudo docker pull pchendla/${{secrets.REPO_TASK}}:${{GITHUB_SHA}}
+        run: sudo docker pull pchendla/${{secrets.REPO_TASK}}:${{github_sha}}
 
       # - name: Set outputs
       #   id: vars
